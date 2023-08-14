@@ -1,8 +1,9 @@
-//use std::collections::HashMap;
-
-use axum::{extract::Path, routing::get, Router};
-
+mod checker;
 mod errors;
+
+//use std::collections::HashMap;
+use axum::{extract::Path, routing::get, Router};
+use errors::AppErrorText;
 
 #[tokio::main]
 async fn main() {
@@ -21,5 +22,5 @@ async fn gate_get(Path((version, api_path)): Path<(String, String)>) -> String {
 }
 
 async fn test_fn() -> errors::AppErrorText<'static> {
-    errors::AppErrorText::NotFound(Some("index"))
+    AppErrorText::NotFound(Some("index"))
 }
